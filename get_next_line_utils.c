@@ -6,13 +6,23 @@
 /*   By: hwon <ohj8447@gmail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 21:59:20 by hwon              #+#    #+#             */
-/*   Updated: 2021/05/14 22:56:01 by hwon             ###   ########.fr       */
+/*   Updated: 2021/05/15 20:44:36 by hwon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *str)
+char	*ft_strchr(const char *str, int c)
+{
+	if (!str)
+		return (0);
+	while (*str)
+		if (*str++ == (char)c)
+			return (char *)(--str);
+	return (0);
+}
+
+size_t	ft_strlen(const char *str)
 {
 	size_t size;
 
@@ -22,16 +32,16 @@ size_t	ft_strlen(char *str)
 	return (size);
 }
 
-char	*ft_strndup(const char *str, size_t size)
+char	*ft_strdup(const char *str)
 {
 	char	*dup;
 	size_t	index;
 
-	if (!str || size == 0)
-		return (str);
+	if (!str)
+		return (char *)(str);
 	index = 0;
-	dup = malloc(size);
-	while (index != size)
+	dup = malloc(ft_strlen(str) + 1);
+	while (str[index])
 	{
 		dup[index] = str[index];
 		index++;
@@ -40,25 +50,22 @@ char	*ft_strndup(const char *str, size_t size)
 	return (dup);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strndup(const char *str, size_t size)
 {
 	char	*dup;
 	size_t	index;
-	size_t	s1_len;
-	size_t	s2_len;
 
-	if (s1 == 0 || s2 == 0)
-		return (0);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	dup = malloc(s1_len + s2_len + 1);
-	if (!dup)
-		return (0);
+	if (!str)
+		return (char *)(str);
+	if (size == 0)
+		return (ft_strdup(""));
 	index = 0;
-	while (s1_len--)
-		dup[index++] = *s1++;
-	while (s2_len--)
-		dup[index++] = *s2++;
+	dup = malloc(size + 1);
+	while (index != size)
+	{
+		dup[index] = str[index];
+		index++;
+	}
 	dup[index] = 0;
 	return (dup);
 }

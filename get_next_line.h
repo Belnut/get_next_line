@@ -6,7 +6,7 @@
 /*   By: hwon <ohj8447@gmail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 22:00:10 by hwon              #+#    #+#             */
-/*   Updated: 2021/05/14 22:01:11 by hwon             ###   ########.fr       */
+/*   Updated: 2021/05/15 20:44:49 by hwon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,12 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+
+char	*ft_strchr(const char *str, int c);
+size_t	ft_strlen(const char *str);
+char	*ft_strdup(const char *str);
+char	*ft_strndup(const char *str, size_t size);
+void	*ft_memset(void *mem, int value, size_t size);
+int		get_next_line(int ft, char **line);
 
 #endif
