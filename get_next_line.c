@@ -6,7 +6,7 @@
 /*   By: hwon <ohj8447@gmail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 21:59:02 by hwon              #+#    #+#             */
-/*   Updated: 2021/05/15 20:45:17 by hwon             ###   ########.fr       */
+/*   Updated: 2021/05/15 21:29:06 by hwon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,14 @@ static int	get_line(char **src, char **line)
 
 int		get_next_line(int fd, char **line)
 {
-	char		buf[BUFFER_SIZE];
+	char		*buf;
 	static char	*left;
 	ssize_t		read_size;
 	size_t		rst;
 
-	if (fd < 0 || line == 0 || BUFFER_SIZE <= 0)
-		return (-1);
+	buf = malloc(BUFFER_SIZE);
+	if (fd < 0 || line == 0 || BUFFER_SIZE <= 0 || buf == 0)
+		return rt_array_free(&buf, -1);
 	while (1)
 	{
 		read_size = read(fd, &buf, BUFFER_SIZE);
@@ -89,6 +90,7 @@ int		get_next_line(int fd, char **line)
 		if (left == 0 || ft_strchr(left, '\n'))
 			break;
 	}
+	rt_array_free(&buf, 0);
 	if (read_size < 0 || left == 0)
 		return (rt_array_free(&left, -1));
 	rst = get_line(&left, line);
