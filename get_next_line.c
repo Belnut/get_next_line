@@ -6,7 +6,7 @@
 /*   By: hwon <ohj8447@gmail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 21:59:02 by hwon              #+#    #+#             */
-/*   Updated: 2021/05/15 21:29:06 by hwon             ###   ########.fr       */
+/*   Updated: 2021/05/16 17:33:27 by hwon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*buf_join(char *dst, const char *buf, ssize_t size)
 	index = 0;
 	while (index < dst_len)
 		dup[index++] = *dst++;
-	anchor = &dup[index];
+	anchor = &(dup[index]);
 	index = 0;
 	while (index < (size_t)size)
 		anchor[index++] = *buf++;
@@ -83,7 +83,7 @@ int		get_next_line(int fd, char **line)
 		return rt_array_free(&buf, -1);
 	while (1)
 	{
-		read_size = read(fd, &buf, BUFFER_SIZE);
+		read_size = read(fd, buf, BUFFER_SIZE);
 		if (read_size <= 0)
 			break;
 		left = buf_join(left, buf, read_size);

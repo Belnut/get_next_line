@@ -6,7 +6,7 @@
 /*   By: hwon <ohj8447@gmail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 21:59:20 by hwon              #+#    #+#             */
-/*   Updated: 2021/05/15 20:44:36 by hwon             ###   ########.fr       */
+/*   Updated: 2021/05/16 17:39:09 by hwon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	ft_strlen(const char *str)
 	size_t size;
 
 	size = 0;
-	while (!str++)
+	while (*str++)
 		size++;
 	return (size);
 }
@@ -61,7 +61,7 @@ char	*ft_strndup(const char *str, size_t size)
 		return (ft_strdup(""));
 	index = 0;
 	dup = malloc(size + 1);
-	while (index != size)
+	while (index != size && str[index])
 	{
 		dup[index] = str[index];
 		index++;
