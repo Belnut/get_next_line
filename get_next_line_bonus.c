@@ -6,13 +6,12 @@
 /*   By: hwon <ohj8447@gmail.com>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 21:59:02 by hwon              #+#    #+#             */
-/*   Updated: 2021/05/17 15:01:24 by hwon             ###   ########.fr       */
+/*   Updated: 2021/05/17 15:36:24 by hwon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-/* not check good size */
 static char	*buf_join(char *dst, const char *buf, ssize_t size)
 {
 	char	*dup;
@@ -58,7 +57,7 @@ static int	get_line(char **src, char **line)
 	if (end == 0)
 	{
 		*line = ft_strndup(*src, ft_strlen(*src));
-		rt_array_free(src, 0); 
+		rt_array_free(src, 0);
 		return (0);
 	}
 	len = (end - *src);
@@ -71,7 +70,7 @@ static int	get_line(char **src, char **line)
 	return (1);
 }
 
-int		get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	char		*buf;
 	static char	*left[INT_MAX];
@@ -88,7 +87,7 @@ int		get_next_line(int fd, char **line)
 		read_size = read(fd, buf, BUFFER_SIZE);
 		left[fd] = buf_join(left[fd], buf, read_size);
 		if (read_size <= 0 || left[fd] == 0 || ft_strchr(left[fd], '\n'))
-			break;
+			break ;
 	}
 	rt_array_free(&buf, 0);
 	if (read_size < 0 || left[fd] == 0)
